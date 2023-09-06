@@ -1,0 +1,10 @@
+import pandas as pd
+data = pd.read_csv('train.csv')
+print('Посмотрим какие столбцы вообще содержат NaN:')
+print(data.loc[:, data.isnull().any()])
+print('Видим, что всего 3 столбца содержат значения NaN')
+print('Но 2 из них содержат текст, для них медианное значение не актуально')
+print('Поэтому остается только Age - заполним его медианным значением\n')
+data['Age'] = data['Age'].fillna(data['Age'].median())
+print('Убедимся, что Age больше не содержит NaN')
+print(data.isnull().any())
